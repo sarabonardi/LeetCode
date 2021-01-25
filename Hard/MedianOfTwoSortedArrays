@@ -1,0 +1,61 @@
+class MedianOfTwoSortedArrays {
+    //Runtime: 2 ms, faster than 99.77% of Java online submissions for Median of Two Sorted Arrays.
+    //Memory Usage: 40.2 MB, less than 57.27% of Java online submissions for Median of Two Sorted Arrays.
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int med = 0;
+        int acount = 0;
+        int bcount = 0;
+        double median = 0;
+        if ((nums1.length + nums2.length) % 2 == 0) {
+            med = (nums1.length + nums2.length) / 2 + 1;
+            int[] sorted = new int[med];
+            for (int i = 0; i < med; i++) {
+                if (acount == nums1.length) {
+                    sorted[i] = nums2[bcount];
+                    bcount++;
+                    continue;
+                }
+                else if (bcount == nums2.length) {
+                    sorted[i] = nums1[acount];
+                    acount++;
+                    continue;
+                }
+                if (nums1[acount] <= nums2[bcount]) {
+                    sorted[i] = nums1[acount];
+                    acount++;
+                }
+                else {
+                    sorted[i] = nums2[bcount];
+                    bcount++;
+                }
+            }
+            median = (double) (sorted[med - 1] + sorted[med - 2]) / 2;
+        }
+        else {
+            med = (nums1.length + nums2.length) / 2 + 1;
+            int[] sorted = new int[med];
+            for (int i = 0; i < med; i++) {
+                if (acount == nums1.length) {
+                    sorted[i] = nums2[bcount];
+                    bcount++;
+                    continue;
+                }
+                else if (bcount == nums2.length) {
+                    sorted[i] = nums1[acount];
+                    acount++;
+                    continue;
+                }
+                if (nums1[acount] <= nums2[bcount]) {
+                    sorted[i] = nums1[acount];
+                    acount++;
+                }
+                else {
+                    sorted[i] = nums2[bcount];
+                    bcount++;
+                }
+            }
+            median = (double) sorted[med - 1];
+        }
+        return median;
+    }
+}
